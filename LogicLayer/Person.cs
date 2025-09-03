@@ -20,7 +20,10 @@ namespace LogicLayer
     public class Person
     {
         #region attributes
-
+        private string? firstName;
+        private string lastName;
+        private string? adress;
+        private string? phone; 
         #endregion
 
         #region properties
@@ -30,25 +33,45 @@ namespace LogicLayer
         /// <exception cref="NameEmptyException">if an empty name is set</exception>		
         public string LastName 
 		{ 
-			get {return "";} 
-			set {} 
+			get 
+            {
+                return lastName;
+            } 
+			set 
+            {
+                if (string.IsNullOrEmpty(value))
+                    throw new NameEmptyException();
+                lastName = value;
+            } 
 		}
         /// <summary>
         /// get or set the person first name.
         /// </summary>
         public string? FirstName 
 		{ 
-			get {return "";}
-            set { }
+			get
+            {
+                return firstName; 
+            }
+            set
+            {
+                firstName = value ;
+            }
         }
         
         /// <summary>
         /// get or set the person's address
         /// </summary>
         public string? Address 
-		{ 
-			get {return "";}
-			set {} 
+		{
+            get
+            {
+                return adress;
+            }
+			set 
+            {
+                adress = value;
+            } 
 		}
         
 		/// <summary>
@@ -56,8 +79,14 @@ namespace LogicLayer
         /// </summary>
         public string? Phone 
 		{ 
-			get {return "";}
-			set {}
+			get 
+            {
+                return phone;
+            }
+			set 
+            {   
+                phone = value;
+            }
 		}
 
         /// <summary>
@@ -65,9 +94,15 @@ namespace LogicLayer
         /// </summary>
         public string Identity
         {
-            get { return ""; }            
+            get 
+            {
+                return LastName.ToUpper() + " " + FirstName[0].ToString().ToUpper() +  FirstName.Substring(1).ToLower(); ;
+
+            }
         }
         #endregion
+
+        #region builder 
 
         /// <summary>
         /// Init a person
@@ -77,8 +112,14 @@ namespace LogicLayer
         /// <exception cref="NameEmptyException">if an empty lastname is set</exception>
         public Person(string last, string first)
         {
-
+            this.lastName = last;
+            this.firstName = first;
+            this.adress = null;
+            this.phone = null;
         }
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// get a string value of the person
@@ -88,7 +129,7 @@ namespace LogicLayer
         {
             return Identity;
         }
-
+        #endregion
 
     }
 }
