@@ -22,7 +22,7 @@ namespace LogicLayer
         #region attributes
         private string? firstName;
         private string lastName;
-        private string? adress;
+        private string? address;
         private string? phoneNumber; 
         #endregion
 
@@ -66,11 +66,11 @@ namespace LogicLayer
 		{
             get
             {
-                return adress;
+                return address;
             }
 			set 
             {
-                adress = value;
+                address = value;
             } 
 		}
         
@@ -114,8 +114,17 @@ namespace LogicLayer
         {
             this.lastName = last;
             this.firstName = first;
-            this.adress = null;
+            this.address = null;
             this.phoneNumber = null;
+        }
+
+        /// <summary>
+        /// Init a 2nd person identical to the one given
+        /// </summary>
+        /// <param name="person">the person to copy</param>
+        public Person(Person person)
+        {
+            this.Copy(person);
         }
         #endregion
 
@@ -128,6 +137,23 @@ namespace LogicLayer
         public override string ToString()
         {
             return Identity;
+        }
+
+        public void Copy(Person person)
+        {
+            this.firstName = person.FirstName;
+            this.lastName = person.LastName;
+            this.address = person.Address;
+            this.phoneNumber = person.PhoneNumber;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Person person &&
+                   this.firstName == person.firstName &&
+                   this.lastName == person.lastName &&
+                   this.address == person.address &&
+                   this.phoneNumber == person.phoneNumber;
         }
         #endregion
 

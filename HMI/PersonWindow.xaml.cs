@@ -23,7 +23,8 @@ namespace HMI
         public PersonWindow(Person person)
         {
             InitializeComponent();
-            this.DataContext = person;
+            Person p = new Person(person);
+            this.DataContext = p;
         }
 
 
