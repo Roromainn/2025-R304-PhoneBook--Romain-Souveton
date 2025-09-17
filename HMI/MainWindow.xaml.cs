@@ -46,7 +46,14 @@ namespace HMI
 
         private void add(object sender, RoutedEventArgs e)
         {
-            
+            Person p = new Person("?", "");
+            PersonWindow fen = new PersonWindow(p);
+            if (fen.ShowDialog() == true)
+            {
+                directory.NewContact(p);
+                PrintList();
+            }
+
         }
 
         private void PrintList()
