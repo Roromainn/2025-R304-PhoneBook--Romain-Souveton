@@ -41,7 +41,12 @@ namespace HMI
 
         private void remove(object sender, RoutedEventArgs e)
         {
-                
+            if (contacts.SelectedItem is Person p)
+            {
+                directory.RemoveContact(p);
+                PrintList();
+            }
+
         }
 
         private void add(object sender, RoutedEventArgs e)

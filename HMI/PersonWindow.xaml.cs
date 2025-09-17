@@ -32,6 +32,7 @@ namespace HMI
             this.DialogResult = false;
         }
 
+
         private void True(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
