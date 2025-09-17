@@ -24,6 +24,7 @@ namespace LogicLayer
         private string lastName;
         private string? address;
         private string? phoneNumber; 
+        private GenderType gender;
         #endregion
 
         #region properties
@@ -100,6 +101,22 @@ namespace LogicLayer
 
             }
         }
+
+        /// <summary>
+        /// get the person's gender
+        /// </summary>
+        public  GenderType Gender
+        {
+            get
+            {  
+                return gender; 
+            }
+            set 
+            {
+                gender = value;
+            }
+                
+        }
         #endregion
 
         #region builder 
@@ -110,12 +127,13 @@ namespace LogicLayer
         /// <param name="last">person's lastname (must not be empty)</param>
         /// <param name="first">person's firstname</param>
         /// <exception cref="NameEmptyException">if an empty lastname is set</exception>
-        public Person(string last, string first)
+        public Person(string last, string first, GenderType gender = GenderType.NEUTRAL)
         {
             this.lastName = last;
             this.firstName = first;
             this.address = null;
             this.phoneNumber = null;
+            this.gender = gender;
         }
 
         /// <summary>
@@ -139,21 +157,32 @@ namespace LogicLayer
             return Identity;
         }
 
+        /// <summary>
+        /// Create a new person based on another Person
+        /// </summary>
+        /// <param name="person"></param>
         public void Copy(Person person)
         {
             this.firstName = person.FirstName;
             this.lastName = person.LastName;
             this.address = person.Address;
             this.phoneNumber = person.PhoneNumber;
+            this.gender = person.gender;
         }
 
+        /// <summary>
+        /// Test if all the attributes of the persons are equals
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object? obj)
         {
             return obj is Person person &&
                    this.firstName == person.firstName &&
                    this.lastName == person.lastName &&
                    this.address == person.address &&
-                   this.phoneNumber == person.phoneNumber;
+                   this.phoneNumber == person.phoneNumber &&
+                   this.gender == person.gender;
         }
         #endregion
 

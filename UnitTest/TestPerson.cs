@@ -69,30 +69,36 @@ namespace UnitTests
             Assert.Equal(original.LastName, copy.LastName);
             Assert.Equal(original.FirstName, copy.FirstName);
             Assert.Equal(original.Address, copy.Address);
-            Assert.Equal(original.PhoneNumber, copy.PhoneNumber); 
+            Assert.Equal(original.PhoneNumber, copy.PhoneNumber);
+            Assert.Equal(original.Gender, copy.Gender);
             Assert.Equal(original, copy);
         }
         [Fact]
         public void TestCopieMethodes()
         {
-            Person original = new Person("john", "does"); 
+            Person original = new Person("john", "does", GenderType.MALE); 
             original.Address = "rue de la guerre";
             original.PhoneNumber = "11111";
-            Person target = new Person("johnny", "doe"); 
-            target.Copy(original);
-            Assert.Equal(original.LastName, target.LastName);
-            Assert.Equal(original.FirstName, target.FirstName);
-            Assert.Equal(original.Address, target.Address);
-            Assert.Equal(original.PhoneNumber, target.PhoneNumber);
-            Assert.Equal(original, target);
+            Person copy = new Person("johnny", "doe"); 
+            copy.Copy(original);
+            Assert.Equal(original.LastName, copy.LastName);
+            Assert.Equal(original.FirstName, copy.FirstName);
+            Assert.Equal(original.Address, copy.Address);
+            Assert.Equal(original.PhoneNumber, copy.PhoneNumber);
+            Assert.Equal(original.Gender, copy.Gender);
+            Assert.Equal(original, copy);
         }
         [Fact]
         public void TestCopieIndependence()
         {
-            Person original = new Person("jean", "chevre"); original.Address = "rue de la neutralite";
-            Person copy = new Person(original); copy.FirstName = "frederique"; copy.Address = "ruru";
+            Person original = new Person("jean", "chevre",GenderType.FEMALE);
+            original.Address = "rue de la neutralite";
+            Person copy = new Person(original); 
+            copy.FirstName = "frederique"; 
+            copy.Address = "ruru";
             Assert.NotEqual(original.FirstName, copy.FirstName); 
             Assert.NotEqual(original.Address, copy.Address); 
+            Assert.Equal(original.Gender, copy.Gender);
             Assert.NotEqual(original, copy);
         }
     }
