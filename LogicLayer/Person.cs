@@ -23,7 +23,7 @@ namespace LogicLayer
         private string? firstName;
         private string lastName;
         private string? adress;
-        private string? phone; 
+        private string? phoneNumber; 
         #endregion
 
         #region properties
@@ -77,15 +77,15 @@ namespace LogicLayer
 		/// <summary>
         /// get or set the phone number of the person
         /// </summary>
-        public string? Phone 
+        public string? PhoneNumber 
 		{ 
 			get 
             {
-                return phone;
+                return phoneNumber;
             }
 			set 
             {   
-                phone = value;
+                phoneNumber = value;
             }
 		}
 
@@ -115,7 +115,7 @@ namespace LogicLayer
             this.lastName = last;
             this.firstName = first;
             this.adress = null;
-            this.phone = null;
+            this.phoneNumber = null;
         }
         #endregion
 

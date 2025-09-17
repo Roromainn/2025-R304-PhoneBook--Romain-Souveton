@@ -35,8 +35,16 @@ namespace HMI
         }
 
         private void edit(object sender, RoutedEventArgs e)
-        { 
-                       
+        {
+            if (contacts.SelectedItem is Person p)
+            {
+                PersonWindow fen = new PersonWindow(p);
+
+                if (fen.ShowDialog() == true)
+                {
+                    PrintList();
+                }
+            }
         }
 
         private void remove(object sender, RoutedEventArgs e)
