@@ -55,9 +55,12 @@ namespace HMI
         {
             if (contacts.SelectedItem is PersonHMI p)
             {
-                Person ARemove = (Person)p.InnerPerson;
-                directory.RemoveContact(ARemove);
-                PrintList();
+                IPerson ARemove = p.InnerPerson;
+                if (ARemove is Person person)
+                {
+                    directory.RemoveContact(person);
+                    PrintList();
+                }
             }
 
         }

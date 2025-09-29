@@ -24,6 +24,14 @@ namespace HMI
         {
             InitializeComponent();
             this.DataContext = person;
+            if (person is PersonHMI pHmi)
+            {
+                Console.WriteLine("C'est un PersonHMI - IsMale: " + pHmi.IsMale + ", IsFemale: " + pHmi.IsFemale);
+            }
+            else
+            {
+                Console.WriteLine("Ce n'est PAS un PersonHMI - type: " + person.GetType());
+            }
         }
 
 

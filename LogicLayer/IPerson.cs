@@ -39,5 +39,8 @@
         /// </summary>
         /// <param name="person"></param>
         void Copy(IPerson person);
+
+        bool IsMale { get; set; } 
+        bool IsFemale { get; set; }
     }
 }

@@ -95,6 +95,9 @@ namespace LogicLayer
             }
                 
         }
+
+        public bool IsMale { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool IsFemale { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         #endregion
 
         #region builder 
