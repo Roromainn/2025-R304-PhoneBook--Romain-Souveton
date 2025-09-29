@@ -20,11 +20,10 @@ namespace HMI
     /// </summary>
     public partial class PersonWindow : Window
     {
-        public PersonWindow(Person person)
+        public PersonWindow(IPerson person)
         {
             InitializeComponent();
-            Person p = new Person(person);
-            this.DataContext = p;
+            this.DataContext = person;
         }
 
 

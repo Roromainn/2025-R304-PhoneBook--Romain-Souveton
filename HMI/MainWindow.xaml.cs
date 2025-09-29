@@ -23,12 +23,12 @@ namespace HMI
         public MainWindow()
         {
             InitializeComponent();
-            directory.NewContact(new Person("harris", "steve"));
-            directory.NewContact(new Person("dickinson", "bruce"));
-            directory.NewContact(new Person("murray", "dave"));
-            directory.NewContact(new Person("smith", "adrian"));
-            directory.NewContact(new Person("gers", "jannick"));
-            directory.NewContact(new Person("mc brain", "nicko"));
+            directory.NewContact(new Person("harris", "steve", GenderType.MALE));
+            directory.NewContact(new Person("dickinson", "bruce", GenderType.MALE));
+            directory.NewContact(new Person("murray", "dave", GenderType.MALE));
+            directory.NewContact(new Person("smith", "adrian", GenderType.MALE));
+            directory.NewContact(new Person("gers", "jannick", GenderType.MALE));
+            directory.NewContact(new Person("mc brain", "nicko", GenderType.FEMALE));
             PrintList();
 
 
@@ -36,12 +36,16 @@ namespace HMI
 
         private void edit(object sender, RoutedEventArgs e)
         {
-            if (contacts.SelectedItem is Person p)
+            if (contacts.SelectedItem is PersonHMI p)
             {
-                PersonWindow fen = new PersonWindow(p);
+                IPerson originale = p.InnerPerson; ;
+                IPerson clone = (IPerson)originale.Clone();
+
+                PersonWindow fen = new PersonWindow(clone);
 
                 if (fen.ShowDialog() == true)
                 {
+                    originale.Copy(clone);
                     PrintList();
                 }
             }
@@ -49,9 +53,10 @@ namespace HMI
 
         private void remove(object sender, RoutedEventArgs e)
         {
-            if (contacts.SelectedItem is Person p)
+            if (contacts.SelectedItem is PersonHMI p)
             {
-                directory.RemoveContact(p);
+                Person ARemove = (Person)p.InnerPerson;
+                directory.RemoveContact(ARemove);
                 PrintList();
             }
 
@@ -74,7 +79,7 @@ namespace HMI
             contacts.Items.Clear();
             foreach (var p in directory.ListContacts())
             {
-                contacts.Items.Add(p);
+                contacts.Items.Add(new PersonHMI(p));
             }
         }
     }

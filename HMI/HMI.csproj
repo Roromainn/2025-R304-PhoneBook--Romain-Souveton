@@ -9,7 +9,41 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="images\add.png" />
+    <None Remove="images\annuaire.ico" />
+    <None Remove="images\contact_f.png" />
+    <None Remove="images\contact_m.png" />
+    <None Remove="images\contact_x.png" />
+    <None Remove="images\delete.png" />
+    <None Remove="images\edit.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\LogicLayer\LogicLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="images\add.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\annuaire.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\contact_f.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\contact_m.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\contact_x.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\delete.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\edit.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

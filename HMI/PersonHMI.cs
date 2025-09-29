@@ -41,16 +41,15 @@
                     switch (Gender)
                     {
                         case GenderType.FEMALE:
-                            res = new BitmapImage(new Uri("pack://application:,,,/HMI;component/Images/contact_f.png"));
+                            res = new BitmapImage(new Uri("pack://application:,,,/Images/contact_f.png"));
                             break;
                         case GenderType.MALE:
-                            res = new BitmapImage(new Uri("pack://application:,,,/HMI;component/Images/contact_m.png"));
-                            break;
-                        case GenderType.NEUTRAL:
+                            res = new BitmapImage(new Uri("pack://application:,,,/Images/contact_m.png"));
                             break;
                         default:
-                            res = new BitmapImage(new Uri("pack://application:,,,/HMI;component/Images/contact_x.png"));
+                            res = new BitmapImage(new Uri("pack://application:,,,/Images/contact_x.png"));
                             break;
+                       
                     }
                     return res;
                 }
@@ -67,10 +66,10 @@
             #region methods
             public object Clone()
             {
-                return person.Clone();
+            return new PersonHMI((IPerson)person.Clone()); 
             }
 
-            public void Copy(Person person)
+            public void Copy(IPerson person)
             {
                 this.person.Copy(person);
             }

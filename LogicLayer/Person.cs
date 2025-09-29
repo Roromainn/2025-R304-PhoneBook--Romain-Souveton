@@ -14,10 +14,7 @@ namespace LogicLayer
 
     }
 	
-    /// <summary>
-    /// A simple person
-    /// </summary>
-    public class Person
+    public class Person : IPerson, ICloneable
     {
         #region attributes
         private string? firstName;
@@ -27,11 +24,7 @@ namespace LogicLayer
         private GenderType gender;
         #endregion
 
-        #region properties
-        /// <summary>
-        /// get or set the person last name
-        /// </summary>
-        /// <exception cref="NameEmptyException">if an empty name is set</exception>		
+        #region properties	
         public string LastName 
 		{ 
 			get 
@@ -45,9 +38,6 @@ namespace LogicLayer
                 lastName = value;
             } 
 		}
-        /// <summary>
-        /// get or set the person first name.
-        /// </summary>
         public string? FirstName 
 		{ 
 			get
@@ -60,9 +50,6 @@ namespace LogicLayer
             }
         }
         
-        /// <summary>
-        /// get or set the person's address
-        /// </summary>
         public string? Address 
 		{
             get
@@ -74,10 +61,7 @@ namespace LogicLayer
                 address = value;
             } 
 		}
-        
-		/// <summary>
-        /// get or set the phone number of the person
-        /// </summary>
+
         public string? PhoneNumber 
 		{ 
 			get 
@@ -90,9 +74,6 @@ namespace LogicLayer
             }
 		}
 
-        /// <summary>
-        /// get the person's identity (LastName FirstName)
-        /// </summary>
         public string Identity
         {
             get 
@@ -102,9 +83,6 @@ namespace LogicLayer
             }
         }
 
-        /// <summary>
-        /// get the person's gender
-        /// </summary>
         public  GenderType Gender
         {
             get
@@ -161,13 +139,13 @@ namespace LogicLayer
         /// Create a new person based on another Person
         /// </summary>
         /// <param name="person"></param>
-        public void Copy(Person person)
+        public void Copy(IPerson person)
         {
             this.firstName = person.FirstName;
             this.lastName = person.LastName;
             this.address = person.Address;
             this.phoneNumber = person.PhoneNumber;
-            this.gender = person.gender;
+            this.gender = person.Gender;
         }
 
         /// <summary>
@@ -185,6 +163,11 @@ namespace LogicLayer
                    this.gender == person.gender;
         }
         #endregion
+
+        public object Clone()
+        {
+            return new Person(this);
+        }
 
     }
 }

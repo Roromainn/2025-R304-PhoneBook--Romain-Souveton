@@ -38,6 +38,6 @@
         /// Create a new person based on another Person
         /// </summary>
         /// <param name="person"></param>
-        void Copy(Person person);
+        void Copy(IPerson person);
     }
 }
