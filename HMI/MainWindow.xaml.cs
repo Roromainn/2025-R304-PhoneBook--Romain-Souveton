@@ -19,17 +19,13 @@ namespace HMI
     public partial class MainWindow : Window
     {
         LogicLayer.Directory directory = new LogicLayer.Directory();
+        private IStorage storage;
 
         public MainWindow()
         {
             InitializeComponent();
-            directory.NewContact(new Person("harris", "steve", GenderType.MALE));
-            directory.NewContact(new Person("dickinson", "bruce", GenderType.MALE));
-            directory.NewContact(new Person("murray", "dave", GenderType.MALE));
-            directory.NewContact(new Person("smith", "adrian", GenderType.MALE));
-            directory.NewContact(new Person("gers", "jannick", GenderType.MALE));
-            directory.NewContact(new Person("mc brain", "nicko", GenderType.FEMALE));
-            PrintList();
+            storage = new MockStorage();
+            directory = storage.Load();
 
 
         }
@@ -47,6 +43,7 @@ namespace HMI
                 {
                     originale.Copy(clone);
                     PrintList();
+                    storage.Update((Person)originale);
                 }
             }
         }
@@ -60,6 +57,7 @@ namespace HMI
                 {
                     directory.RemoveContact(person);
                     PrintList();
+                    storage.Delete(person);
                 }
             }
 
@@ -73,6 +71,7 @@ namespace HMI
             {
                 directory.NewContact(p);
                 PrintList();
+                storage.Update(p);
             }
 
         }
