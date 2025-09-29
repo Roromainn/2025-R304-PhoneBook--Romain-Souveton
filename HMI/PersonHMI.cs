@@ -1,0 +1,79 @@
+﻿    using LogicLayer;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.Windows.Media.Imaging;
+
+    namespace HMI
+    {
+        internal class PersonHMI : IPerson
+        {
+            #region attributes
+            IPerson person;
+            #endregion
+            #region builder
+            public PersonHMI(IPerson person)
+            {
+                this.person = person;
+            }
+            #endregion
+            #region properties
+
+            public string? Address { get => person.Address; set => person.Address = value; }
+            public string? FirstName { get => person.FirstName; set => person.FirstName = value; }
+            public GenderType Gender { get => person.Gender; set => person.Gender = value; }
+
+            public string Identity => person.Identity;
+
+            public string LastName { get => person.LastName; set => person.LastName = value; }
+            public string? PhoneNumber { get => person.PhoneNumber; set => person.PhoneNumber = value; }
+
+            /// <summary>
+            /// deals with the image that has to be shown
+            /// </summary>
+            public BitmapImage? Icon
+            {
+                get
+                {
+                    BitmapImage? res = null;
+                    switch (Gender)
+                    {
+                        case GenderType.FEMALE:
+                            res = new BitmapImage(new Uri("pack://application:,,,/HMI;component/Images/contact_f.png"));
+                            break;
+                        case GenderType.MALE:
+                            res = new BitmapImage(new Uri("pack://application:,,,/HMI;component/Images/contact_m.png"));
+                            break;
+                        case GenderType.NEUTRAL:
+                            break;
+                        default:
+                            res = new BitmapImage(new Uri("pack://application:,,,/HMI;component/Images/contact_x.png"));
+                            break;
+                    }
+                    return res;
+                }
+            }
+
+            /// <summary>
+            /// shows the person depicted
+            /// </summary>
+            public IPerson InnerPerson
+            {
+                get { return person; }
+            }
+            #endregion
+            #region methods
+            public object Clone()
+            {
+                return person.Clone();
+            }
+
+            public void Copy(Person person)
+            {
+                this.person.Copy(person);
+            }
+        }
+        #endregion
+    }
