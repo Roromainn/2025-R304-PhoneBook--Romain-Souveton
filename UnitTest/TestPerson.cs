@@ -48,8 +48,8 @@ namespace UnitTests
         {
             Person p = CreatePerson();
             string s = "03-80-81-82-83";
-            p.Phone = s;
-            Assert.Equal(s, p.Phone);
+            p.PhoneNumber = s;
+            Assert.Equal(s, p.PhoneNumber);
         }
 
         [Fact]
@@ -57,6 +57,43 @@ namespace UnitTests
         {
             Person p = CreatePerson();
             Assert.Equal("DOE John", p.Identity);	
+        }
+
+        [Fact]
+        public void TestCopieConstructeur()
+        {
+            Person original = new Person("john", "doe");
+            original.Address = "rue de la paix"; 
+            original.PhoneNumber = "2222";
+            Person copy = new Person(original);
+            Assert.Equal(original.LastName, copy.LastName);
+            Assert.Equal(original.FirstName, copy.FirstName);
+            Assert.Equal(original.Address, copy.Address);
+            Assert.Equal(original.PhoneNumber, copy.PhoneNumber); 
+            Assert.Equal(original, copy);
+        }
+        [Fact]
+        public void TestCopieMethodes()
+        {
+            Person original = new Person("john", "does"); 
+            original.Address = "rue de la guerre";
+            original.PhoneNumber = "11111";
+            Person target = new Person("johnny", "doe"); 
+            target.Copy(original);
+            Assert.Equal(original.LastName, target.LastName);
+            Assert.Equal(original.FirstName, target.FirstName);
+            Assert.Equal(original.Address, target.Address);
+            Assert.Equal(original.PhoneNumber, target.PhoneNumber);
+            Assert.Equal(original, target);
+        }
+        [Fact]
+        public void TestCopieIndependence()
+        {
+            Person original = new Person("jean", "chevre"); original.Address = "rue de la neutralite";
+            Person copy = new Person(original); copy.FirstName = "frederique"; copy.Address = "ruru";
+            Assert.NotEqual(original.FirstName, copy.FirstName); 
+            Assert.NotEqual(original.Address, copy.Address); 
+            Assert.NotEqual(original, copy);
         }
     }
 }

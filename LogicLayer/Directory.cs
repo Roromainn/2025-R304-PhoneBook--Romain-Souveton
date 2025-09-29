@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace LogicLayer
     public class Directory
     {
         #region associations
-
+        private List<Person> contacts;
         #endregion
 
         #region operations
@@ -23,6 +24,8 @@ namespace LogicLayer
         /// <param name="p">the person to add</param>
         public void NewContact(Person p)
         {
+                       
+            this.contacts.Add(p);
             
         }
         /// <summary>
@@ -31,7 +34,9 @@ namespace LogicLayer
         /// <param name="p">person to remove</param>
         public void RemoveContact(Person p)
         {
-            
+          
+             contacts.Remove(p);
+              
         }
         /// <summary>
         /// List all the contacts
@@ -39,7 +44,7 @@ namespace LogicLayer
         /// <returns>An simple array containing contacts</returns>
         public Person[] ListContacts()
         {
-            return null;
+            return contacts.ToArray();
         }
 
         /// <summary>
@@ -49,7 +54,22 @@ namespace LogicLayer
         /// <returns>an array with the contacts found</returns>
         public Person[] ListContacts(char initial)
         {
-            return null;
+            List<Person> res = new List<Person> ();
+            foreach (Person p in contacts)
+            {
+                if (p.LastName[0] == initial)
+                {
+                    res.Add(p);
+                }
+            }
+            return res.ToArray();
+        }
+        #endregion
+
+        #region builder
+        public Directory()
+        {
+            contacts = new List<Person>();
         }
         #endregion
     }
