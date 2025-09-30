@@ -2,6 +2,7 @@
 {
     public interface IPerson : ICloneable
     {
+        #region--propriétés--
 
         /// <summary>
         /// get or set the person's address
@@ -33,11 +34,14 @@
         /// get or set the phone number of the person
         /// </summary>
         string? PhoneNumber { get; set; }
+        #endregion
 
+        #region--methodes--
         /// <summary>
         /// Create a new person based on another Person
         /// </summary>
         /// <param name="person"></param>
         void Copy(IPerson person);
+        #endregion
     }
 }

@@ -20,6 +20,11 @@ namespace HMI
     /// </summary>
     public partial class PersonWindow : Window
     {
+        #region--Constructeur--
+        /// <summary>
+        /// Constructeur de la fenêtre de gestion d'une personne
+        /// </summary>
+        /// <param name="person">personne sur laquelle les opérations seront faites</param>
         public PersonWindow(IPerson person)
         {
             InitializeComponent();
@@ -33,17 +38,25 @@ namespace HMI
                 Console.WriteLine("Ce n'est PAS un PersonHMI - type: " + person.GetType());
             }
         }
+        #endregion
 
-
+        #region--Méthodes--
+        /// <summary>
+        /// Bouton Annuler - ferme la fenêtre et retourne false
+        /// </summary>
         private void False(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
         }
 
-
+        /// <summary>
+        /// Bouton OK - ferme la fenêtre et retourne true
+        /// </summary>
         private void True(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
         }
+        #endregion
+
     }
 }

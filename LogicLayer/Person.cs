@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace LogicLayer
@@ -13,14 +15,20 @@ namespace LogicLayer
     {
 
     }
-	
+
+    [DataContract]
     public class Person : IPerson, ICloneable
     {
         #region attributes
+        [DataMember]
         private string? firstName;
+        [DataMember]
         private string lastName;
+        [DataMember]
         private string? address;
-        private string? phoneNumber; 
+        [DataMember]
+        private string? phoneNumber;
+        [DataMember]
         private GenderType gender;
         #endregion
 
@@ -98,13 +106,6 @@ namespace LogicLayer
         #endregion
 
         #region builder 
-
-        /// <summary>
-        /// Init a person
-        /// </summary>
-        /// <param name="last">person's lastname (must not be empty)</param>
-        /// <param name="first">person's firstname</param>
-        /// <exception cref="NameEmptyException">if an empty lastname is set</exception>
         public Person(string last, string first, GenderType gender = GenderType.NEUTRAL)
         {
             this.lastName = last;
@@ -114,10 +115,6 @@ namespace LogicLayer
             this.gender = gender;
         }
 
-        /// <summary>
-        /// Init a 2nd person identical to the one given
-        /// </summary>
-        /// <param name="person">the person to copy</param>
         public Person(Person person)
         {
             this.Copy(person);
@@ -126,19 +123,11 @@ namespace LogicLayer
 
         #region Methods
 
-        /// <summary>
-        /// get a string value of the person
-        /// </summary>
-        /// <returns>a string contains the person's last & first names</returns>
         public override string ToString()
         {
             return Identity;
         }
 
-        /// <summary>
-        /// Create a new person based on another Person
-        /// </summary>
-        /// <param name="person"></param>
         public void Copy(IPerson person)
         {
             this.firstName = person.FirstName;
@@ -148,11 +137,7 @@ namespace LogicLayer
             this.gender = person.Gender;
         }
 
-        /// <summary>
-        /// Test if all the attributes of the persons are equals
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         public override bool Equals(object? obj)
         {
             return obj is Person person &&
@@ -162,12 +147,12 @@ namespace LogicLayer
                    this.phoneNumber == person.phoneNumber &&
                    this.gender == person.gender;
         }
-        #endregion
 
         public object Clone()
         {
             return new Person(this);
         }
+        #endregion
 
     }
 }

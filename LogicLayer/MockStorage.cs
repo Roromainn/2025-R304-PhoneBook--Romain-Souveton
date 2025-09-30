@@ -6,15 +6,19 @@ using System.Threading.Tasks;
 
 namespace LogicLayer
 {
+    /// <summary>
+    /// Storage factice pour tester
+    /// </summary>
     public class MockStorage : IStorage
     {
-        public Person Create()
+        #region--Méthodes--
+        public IPerson Create()
         {
             return new Person("?", "");
 
         }
 
-        public void Delete(Person p)
+        public void Delete(IPerson p)
         {
             throw new NotImplementedException();
         }
@@ -33,9 +37,10 @@ namespace LogicLayer
             return directory;
         }
 
-        public void Update(Person p)
+        public void Update(IPerson p)
         {
             throw new NotImplementedException();
         }
+        #endregion
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LogicLayer
 {
     /// <summary>
-    /// Possible gender 
+    /// Genre d'une personne
     /// </summary>
     public enum GenderType { NEUTRAL, MALE, FEMALE };
 }
