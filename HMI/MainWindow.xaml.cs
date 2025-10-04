@@ -9,37 +9,53 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using JsonStorage;
 using LogicLayer;
+
 
 namespace HMI
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Classe principale de l'IHM
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region--attributs--
+        /// <summary>
+        /// Répertoire de contacts
+        /// </summary>
         LogicLayer.Directory directory = new LogicLayer.Directory();
+        /// <summary>
+        /// Storage des contacts
+        /// </summary>
+        private IStorage storage;
+        #endregion
 
+        #region---constructeur--
+        /// <summary>
+        /// Constructeur de la fenêtre principale
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
-            directory.NewContact(new Person("harris", "steve", GenderType.MALE));
-            directory.NewContact(new Person("dickinson", "bruce", GenderType.MALE));
-            directory.NewContact(new Person("murray", "dave", GenderType.MALE));
-            directory.NewContact(new Person("smith", "adrian", GenderType.MALE));
-            directory.NewContact(new Person("gers", "jannick", GenderType.MALE));
-            directory.NewContact(new Person("mc brain", "nicko", GenderType.FEMALE));
+            string chemin = System.IO.Directory.GetCurrentDirectory();  
+
+            storage = new StorageJson(chemin + "/sauvegarde.json");
+            directory = storage.Load();
             PrintList();
-
-
         }
+        #endregion
 
+        #region--Méthodes--
+        /// <summary>
+        /// Modifie le contact sélectionné
+        /// </summary>
         private void edit(object sender, RoutedEventArgs e)
         {
             if (contacts.SelectedItem is PersonHMI p)
             {
-                IPerson originale = p.InnerPerson; ;
-                IPerson clone = (IPerson)originale.Clone();
+                PersonHMI originale = p; ;
+                PersonHMI clone = (PersonHMI)originale.Clone();
 
                 PersonWindow fen = new PersonWindow(clone);
 
@@ -47,10 +63,14 @@ namespace HMI
                 {
                     originale.Copy(clone);
                     PrintList();
+                    storage.Update(originale);
                 }
             }
         }
 
+        /// <summary>
+        /// Supprime le contact sélectionné
+        /// </summary>
         private void remove(object sender, RoutedEventArgs e)
         {
             if (contacts.SelectedItem is PersonHMI p)
@@ -60,31 +80,52 @@ namespace HMI
                 {
                     directory.RemoveContact(person);
                     PrintList();
+                    storage.Delete(person);
                 }
             }
 
         }
 
+        /// <summary>
+        /// Ajoute un nouveau contact
+        /// </summary>
         private void add(object sender, RoutedEventArgs e)
         {
-            Person p = new Person("?", "");
-            PersonWindow fen = new PersonWindow(p);
+            IPerson p = storage.Create();
+            PersonHMI phmi = new PersonHMI(p);
+            PersonWindow fen = new PersonWindow(phmi);
             if (fen.ShowDialog() == true)
             {
                 directory.NewContact(p);
                 PrintList();
+                storage.Update(p);
             }
 
         }
 
+        /// <summary>
+        /// Affiche la liste des contacts dans la ListBox
+        /// </summary>
         private void PrintList()
         {
             contacts.Items.Clear();
-            foreach (var p in directory.ListContacts())
+            try
             {
-                contacts.Items.Add(new PersonHMI(p));
+                var list = this.directory.ListContacts();
+                if (!(list == null))
+                {
+                    foreach (var p in list)
+                    {
+                        contacts.Items.Add(new PersonHMI(p));
+                    }
+                }
+            }
+            catch
+            {
             }
         }
+        #endregion
+
     }
 
 

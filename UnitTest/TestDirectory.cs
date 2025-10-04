@@ -7,6 +7,7 @@ namespace UnitTests
 {
     public class TestDirectory
     {
+        
         [Fact]
         public void TestNew()
         {
@@ -39,9 +40,10 @@ namespace UnitTests
             d.NewContact(new LogicLayer.Person("toto", ""));
             d.NewContact(new LogicLayer.Person("dandy", "bill"));
 
-            LogicLayer.Person[] dPers = d.ListContacts('d');
+            LogicLayer.IPerson[] dPers = d.ListContacts('d');
             Assert.Equal(2, dPers.Length);
             Assert.Equal("dandy", dPers[1].LastName);
         }
+        
     }
 }
