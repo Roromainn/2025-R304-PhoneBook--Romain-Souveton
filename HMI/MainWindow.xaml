@@ -18,7 +18,25 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="contacts"  Grid.RowSpan="5" Margin="0,0,0,10"/>
+        <ListView x:Name="contacts" Grid.RowSpan="5" Margin="0,0,0,10">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="{Binding Icon}" Margin="6" Grid.RowSpan="2" Grid.Column="0"/>
+                        <Label Grid.Column="1" Grid.Row="0" Content="{Binding LastName}" FontWeight="Bold"/>
+                        <Label Grid.Column="1" Grid.Row="1" Content="{Binding FirstName}" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         <Button Grid.Column="1" x:Name="Add" Content="Add Person" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Height="67" Width="380" Click="add" />
         <Button Grid.Column="1" x:Name="Edit" Content="Edit Person" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Height="67" Width="380" Click="edit"/>
         <Button Grid.Column="1" x:Name="Remove" Content="Remove Person" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Height="67" Width="380" Click="remove"/>

@@ -20,11 +20,18 @@ namespace HMI
     /// </summary>
     public partial class PersonWindow : Window
     {
-        public PersonWindow(Person person)
+        public PersonWindow(IPerson person)
         {
             InitializeComponent();
-            Person p = new Person(person);
-            this.DataContext = p;
+            this.DataContext = person;
+            if (person is PersonHMI pHmi)
+            {
+                Console.WriteLine("C'est un PersonHMI - IsMale: " + pHmi.IsMale + ", IsFemale: " + pHmi.IsFemale);
+            }
+            else
+            {
+                Console.WriteLine("Ce n'est PAS un PersonHMI - type: " + person.GetType());
+            }
         }
 
 
